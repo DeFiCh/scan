@@ -94,9 +94,15 @@ context('/vaults/[vaultid] on desktop', function () {
 
     it('should OverflowTable Header Information', function () {
       cy.findByTestId('VaultLoansDesktop.LoanToken').should('be.visible').should('have.text', 'Loan Token')
-      cy.findByTestId('VaultLoansDesktop.LoanValue').should('be.visible').should('have.text', 'Loan Value (USD)')
+      cy.findByTestId('VaultLoansDesktop.TotalLoanValue').should('be.visible').should('have.text', 'Total Loan Value (USD)')
+      cy.findByTestId('VaultLoansDesktop.TotalLoanValue').within(() => {
+        cy.findByTestId('InfoHoverPopover').should('be.visible')
+      })
       cy.findByTestId('VaultLoansDesktop.LoanAmount').should('be.visible').should('have.text', 'Loan Amount')
-      cy.findByTestId('VaultLoansDesktop.AccumulatedInterest').should('be.visible').should('have.text', 'Accumulated Interest (USD)')
+      cy.findByTestId('VaultLoansDesktop.AccruedInterest').should('be.visible').should('have.text', 'Accrued Interest')
+      cy.findByTestId('VaultLoansDesktop.AccruedInterest').within(() => {
+        cy.findByTestId('InfoHoverPopover').should('be.visible')
+      })
       cy.findByTestId('VaultLoansDesktop.TotalInterestRate').should('be.visible').should('have.text', 'Total Interest Rate (APR)')
       cy.findByTestId('VaultLoansDesktop.TotalInterestRate').within(() => {
         cy.findByTestId('InfoHoverPopover').should('be.visible')
@@ -187,11 +193,10 @@ context('/vaults/[vaultid] on mobile', function () {
         cy.findAllByTestId('LoanDetailsCard').within(() => {
           cy.findByTestId('LoanDetailsCard.AssetIcon').should('be.visible')
           cy.findByTestId('LoanDetailsCard.displaySymbol').should('be.visible')
-          cy.findByTestId('LoanDetailsCard.LoanValueTitle').should('be.visible')
-          cy.findByTestId('LoanDetailsCard.LoanValue').should('be.visible')
+          cy.findByTestId('LoanDetailsCard.TotalLoanValue').should('be.visible')
           cy.findByTestId('LoanDetailsCard.Toggle').click()
           cy.findByTestId('LoanDetailsCard.LoanAmount').should('be.visible')
-          cy.findByTestId('LoanDetailsCard.AccumulatedInterest').should('be.visible')
+          cy.findByTestId('LoanDetailsCard.AccruedInterest').should('be.visible')
           cy.findByTestId('LoanDetailsCard.TotalInterestRate').should('be.visible')
         })
       })
